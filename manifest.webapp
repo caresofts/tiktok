@@ -1,0 +1,89 @@
+{
+	"name": "TikTok",
+	"description": "Real Short Videos.",
+	"ime_default_softkey_bar": true,
+	"version": "1.3",
+	"type": "certified",
+	"launch_path": "/index.html",
+	"developer": {
+		"name": "fanofgk",
+		"url": "https://www.tiktok.com/en/"
+	},
+	"default_locale": "en-US",
+	"origin": "app://tiktokv3",
+	
+	"cursor": true,
+		"fullscreen":"true",
+	"locales": {
+		"en-US": {
+			"name": "Tik Tok"
+		}
+	},
+	"icons": {
+	    "56":"/ubereats56.png",
+        "84":"/ubereats84.png",
+        "112":"/ubereats112.png"
+		
+	},
+  "permissions": {
+    "browser": {
+      "description": "Required for embedding a browser"
+    },
+	
+     "geolocation": {
+      "description": "Required for check-ins"
+    },
+   
+	"desktop-notification": {
+      "description": "Required for desktop notifications"
+    },
+	
+	 "settings": {
+            "access": "readwrite"
+        },
+		
+        "audio-channel-content": {},
+        
+        "softkey": {},
+        
+        "feature-detection": {},
+        
+        "engmode-extension": {},
+        
+       
+        "volumemanager": {}
+    
+  },
+   "connections": {
+        "assistancecomms": {
+            "description":"Communicate between Video and System",
+            "rules": {}
+        }
+    },
+  
+  "activities": {
+        
+        
+       
+        
+        "view": {
+            "filters": {
+                "type": ["video/webm", "video/mp4", "video/3gpp", "video/3gpp2", "video/ogg"]
+            }
+            ,
+            "href":"tiktok.html",
+            "disposition":"inline",
+            "returnValue":true
+        },
+        
+        "open": {
+            "filters": {
+                "type": ["video/webm", "video/mp4", "video/3gpp", "video/3gpp2", "video/ogg", "audio/3gpp"]
+            }
+            ,
+            "href":"tiktok.html",
+            "disposition":"inline",
+            "returnValue":true
+        }
+    }
+}
