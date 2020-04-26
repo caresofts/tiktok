@@ -1,104 +1,52 @@
-var browser = document.querySelector('body');
+console.clear();
 
-var volume = navigator.volumeManager;
-//Taken from Mozilla docs :)
-function canMoveBwd() {
+feather.replace()
 
-      if(window.confirm('exit Browser?')) {
-        window.close();
-      }
-      else {
+const root = document.documentElement;
 
-      }
-    }
-	
-	function zoomInWidth()
-   {
-   var body = document.querySelector("body");
-                var currWidth = body.clientWidth;
-                if(currWidth == 1000000){
-                    alert("Maximum zoom-in level of 1 Million reached.");
-                } else{
-                    body.style.width = (currWidth + 50) + "px";
-                } 
-  }
+document.getElementById('miniButton').addEventListener('click', () => {
+	const sidebar = document.querySelector('.sidebar');
+	sidebar.classList.toggle('sidebar--mini');
+	if(sidebar.classList.contains('sidebar--mini')) {
+		sidebar.querySelector('.profile__name').style.display = 'none';
+		sidebar.querySelector('.theme-btn__label').style.display = 'none';
+		sidebar.querySelectorAll('.menu__title').forEach(item => {
+				item.style.display = 'none';
+			})
+	} else {
+		setTimeout(() => {
+			sidebar.querySelector('.profile__name').style.display = 'block';
+			sidebar.querySelector('.theme-btn__label').style.display = 'block';
+			sidebar.querySelectorAll('.menu__title').forEach(item => {
+				item.style.display = 'block';
+			})
+		}, 200)
+	}
+});
 
-function zoomOutWidth()
- {
-  var body = document.querySelector("body");
-                var currWidth = body.clientWidth;
-                if(currWidth == 500000){
-                    alert("Maximum zoom-out level reached.");
-                } else{
-                    body.style.width = (currWidth - 50) + "px";
-                }
- }
-	
-	function zoomInHeight()
-   {
-   var body = document.querySelector("body");
-                var currWidth = body.clientHeight;
-                if(currWidth == 1000000){
-                    alert("Maximum zoom-in level of 1 Million reached.");
-                } else{
-                    body.style.height = (currWidth + 50) + "px";
-                } 
-  }
+const themeChange = (bodyBg, bg,color,subtle,border) => {
+	root.style.setProperty('--bg', `var(--${bodyBg})`);
+	root.style.setProperty('--component-bg', `var(--${bg})`);
+	root.style.setProperty('--component-color', `var(--${color})`);
+	root.style.setProperty('--component-subtle', `var(--${subtle})`);
+	root.style.setProperty('--component-border', `var(--${border})`);
+}
 
-function zoomOutHeight()
- {
-  var body = document.querySelector("body");
-                var currWidth = body.clientHeight;
-                if(currWidth == 500000){
-                    alert("Maximum zoom-out level reached.");
-                } else{
-                    body.style.height = (currWidth - 50) + "px";
-                }
- }
-
-//Taken from KaiOS Tech docs and Stackoverflow :)
-function handleKeyDown(evt) {
-    switch (evt.key) {
-         case 'SoftLeft':
-         volume.requestDown()
-         break;
-		 
-        case 'SoftRight':
-                volume.requestUp()
-        break;
-		
-		case '7':
-	     zoomInHeight();
-	     break;
-		 
-		 case '9':
-	     zoomOutHeight();
-	      break;
-		  
-		  case '4':
-	     zoomInWidth();
-	     break;
-		 
-		 case '6':
-	     zoomOutWidth();
-	      break;
-	    
-        case 'Backspace':
-            evt.preventDefault();
-
-            canMoveBwd();
-        break;
-        case '1':
-            evt.preventDefault();
-Views.MainView();
-        break;
-        case '2':
-        models.CurrentUser.init();
-        
-       
-        break;
-
-    };
-};
-
-document.addEventListener('keydown', handleKeyDown);
+document.getElementById('themeButton').addEventListener('click', function() {
+	const sidebar = document.querySelector('.sidebar');
+	if(sidebar.classList.contains('sidebar--light')) {
+		sidebar.classList.remove('sidebar--light');
+		themeChange('faded','black','white','lightest-gray','gray');
+		setTimeout(() => {
+			this.innerHTML = `<i data-feather="moon" class="theme-btn__icon"></i><span class="theme-btn__label">Night mode</span>`;
+			feather.replace()
+		}, 200)
+	} else {
+		sidebar.classList.add('sidebar--light');
+		themeChange('black','white','black','gray','lightest-gray');
+		setTimeout(() => {
+			this.innerHTML = `<i data-feather="sun" class="theme-btn__icon"></i><span class="theme-btn__label">Day mode</span>`;
+			feather.replace()
+		}, 200)
+	}
+})
